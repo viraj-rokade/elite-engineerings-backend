@@ -1,6 +1,8 @@
 const fs = require("fs");
+const path = require("path");
 const nodemailer = require("nodemailer");
 const { dataToBind } = require("../helper");
+require("dotenv").config({ path: "./.env.local" });
 
 module.exports = async (req, res) => {
   if (req.method !== "POST") {
