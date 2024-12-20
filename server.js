@@ -9,15 +9,6 @@ require("dotenv").config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-const dataToBind = (data, databindings) => {
-  for (const prop in databindings) {
-    if (databindings.hasOwnProperty(prop)) {
-      data = data.split(`\${${prop}}`).join(databindings[prop]);
-    }
-  }
-  return data;
-};
-
 // Middleware
 app.use(bodyParser.json());
 app.use(cors()); // Enable cross-origin requests
