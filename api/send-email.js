@@ -1,10 +1,15 @@
 const fs = require("fs");
 const path = require("path");
+const cors = require("cors"); 
 const nodemailer = require("nodemailer");
 const { dataToBind } = require("../helper");
 require("dotenv").config({ path: "./.env.local" });
 
 module.exports = async (req, res) => {
+
+  // Enable CORS for this route (or globally if necessary)
+  res.setHeader("Access-Control-Allow-Origin", "*"); // Allow all origins (for testing purposes)
+
   if (req.method !== "POST") {
     return res.status(405).json({ error: "Only POST requests are allowed" });
   }
@@ -41,9 +46,9 @@ module.exports = async (req, res) => {
     };
 
     await transporter.sendMail(mailOptions);
-    res.status(200).json({ message: "Email sent successfully!" });
+    return res.status(200).json({ message: "Email sent successfully!" });
   } catch (error) {
     console.error("Email error:", error);
-    res.status(500).json({ error: "Failed to send email" });
+    return res.status(500).json({ error: "Failed to send email" });
   }
 };
