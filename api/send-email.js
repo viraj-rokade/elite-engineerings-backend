@@ -25,6 +25,17 @@ module.exports = async (req, res) => {
       },
     });
 
+    // custom smtp
+    /* const transporter = nodemailer.createTransport({
+      host: "smtp.example.com",
+      port: 587,
+      secure: false, // true for port 465, false for 587
+      auth: {
+        user: process.env.EMAIL,
+        pass: process.env.PASSWORD,
+      },
+    }); */
+
     const fsp = fs.promises;
     const htmlContent = await fsp.readFile(
       path.join(__dirname, "mailContent.html"),
